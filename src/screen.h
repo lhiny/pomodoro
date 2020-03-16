@@ -4,6 +4,7 @@
 #pragma once
 
 #include <curses.h>
+#include "digit.h"
 
 extern const char WELCOME[55];
 extern const char WORK[6];

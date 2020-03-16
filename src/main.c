@@ -66,7 +66,13 @@ void timer_handler(int _signal) {
 // Initializes screen and creates timer
 void init() {
     init_screen();
-
+    int res = init_digits();
+    if (res != 0) {
+        printw("Could not open digits file!\nPress any key to exit...");
+        getch();
+        endwin();
+        exit(1);
+    }
     minutes = WORK_MINUTES;
     seconds = 0;
     rest = FALSE;

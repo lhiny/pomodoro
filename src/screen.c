@@ -25,7 +25,7 @@ void print_digit(int digit, int y, int x) {
     int res = get_digit_text(digit, buff);
     if (res != 0) {
         // unrecoverable error - can't open digits file
-        printw("Could not open digits file!\nPress any key to exit...");
+        printw("Oops! This shouldn't have happened.\nPress any key to exit...");
         getch();
         endwin();
         exit(1);
