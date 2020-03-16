@@ -11,7 +11,7 @@ extern const char REST[6];
 extern const char PAUSE[];
 extern const char RESUME[];
 
-// initializes screen and prints welcome message
+// Initializes screen and prints welcome message
 void init_screen();
 
 // Prints digit ascii art. (x, y) refer to the top-left corner of the digit.

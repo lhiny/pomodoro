@@ -10,12 +10,13 @@ pomodoro: $(SRC)
 	$(CC) $(CFLAGS) -o build/$@ $(SRC) $(LIBS)
 
 clean:
-	rm build/*
+	rm -rf build
 
 install: pomodoro
 	cp build/pomodoro /usr/local/bin/
 	mkdir /usr/local/share/pomodoro
 	cp data/digits.dat /usr/local/share/pomodoro/
+	rm -rf build
 
 uninstall:
 	rm /usr/local/bin/pomodoro
