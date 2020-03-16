@@ -5,6 +5,7 @@ CLI "pomodoro method" timer
 Make sure you have libncurses installed, and run:
 
 ```
+$ git clone https://github.com/lhiny/pomodoro.git && cd pomodoro
 $ sudo make install
 ```
 
