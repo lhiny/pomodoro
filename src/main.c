@@ -5,10 +5,10 @@
 #include <stdbool.h>
 
 
-#define WORK_MINUTES 1
-#define REST_MINUTES 1
+#define WORK_MINUTES 25
+#define REST_MINUTES 5
 #define LONG_REST_MINUTES 25
-#define WORK_INTERVALS_MAX 2
+#define WORK_INTERVALS_MAX 4
 
 int minutes;
 int seconds;
