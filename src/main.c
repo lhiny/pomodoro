@@ -5,11 +5,14 @@
 #include <stdbool.h>
 
 
-#define WORK_MINUTES 25
-#define REST_MINUTES 5
+#define WORK_MINUTES 1
+#define REST_MINUTES 1
+#define LONG_REST_MINUTES 25
+#define WORK_INTERVALS_MAX 2
 
 int minutes;
 int seconds;
+int work_intervals_passed;
 bool running;
 bool rest;
 struct itimerval timer_desc;
@@ -43,22 +46,26 @@ int main() {
 // Called when the timer fires
 void timer_handler(int _signal) {
     if (seconds < 1) {
-        if (minutes < 1) {
-            if (!rest) {
-                minutes = REST_MINUTES;
-                seconds = 0;
-                rest = TRUE;
-            } else {
-                minutes = WORK_MINUTES;
-                seconds = 0;
-                rest = FALSE;
-            }
-        } else {
-            minutes -= 1;
-            seconds = 59;
-        }
+        seconds = 59;
+        minutes--;
     } else {
         seconds--;
+    }
+    if (minutes < 0) {
+        if (!rest) {
+            work_intervals_passed++;
+            rest = TRUE;
+            minutes = REST_MINUTES;
+            seconds = 0;
+            if (work_intervals_passed == WORK_INTERVALS_MAX) {
+                work_intervals_passed = 0;
+                minutes = LONG_REST_MINUTES;
+            }
+        } else  {
+            rest = FALSE;
+            minutes = WORK_MINUTES;
+            seconds = 0;
+        }
     }
     update(minutes, seconds, running, rest);
 }
@@ -75,6 +82,7 @@ void init() {
     }
     minutes = WORK_MINUTES;
     seconds = 0;
+    work_intervals_passed = 0;
     rest = FALSE;
     running = FALSE;
     struct timeval interval = {1, 0};       // 1.000000 s
